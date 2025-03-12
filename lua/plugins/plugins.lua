@@ -130,22 +130,58 @@ return {
   },
 
   {
-    {
-      "akinsho/toggleterm.nvim",
-      config = true,
-      cmd = "ToggleTerm",
-      keys = { { "<F4>", "<cmd>ToggleTerm<cr>", desc = "Toggle floating terminal" } },
-      opts = {
-        open_mapping = [[<F4>]],
-        direction = "float",
-        shade_filetypes = {},
-        hide_numbers = true,
-        insert_mappings = true,
-        terminal_mappings = true,
-        start_in_insert = true,
-        close_on_exit = true,
-        shell = "zsh",
-      },
+    "akinsho/toggleterm.nvim",
+    config = true,
+    cmd = "ToggleTerm",
+    keys = { { "<F4>", "<cmd>ToggleTerm<cr>", desc = "Toggle floating terminal" } },
+    opts = {
+      open_mapping = [[<F4>]],
+      direction = "float",
+      shade_filetypes = {},
+      hide_numbers = true,
+      insert_mappings = true,
+      terminal_mappings = true,
+      start_in_insert = true,
+      close_on_exit = true,
+      shell = "zsh",
     },
+  },
+
+  {
+    "Mr-LLLLL/interestingwords.nvim",
+    opts = {
+      -- colors = { "#aeee00", "#ff0000", "#0000ff", "#b88823", "#ffa724", "#ff2c4b" },
+      colors = {
+        "#aeee00",
+        "#e5c07b",
+        "#7FFFD4",
+        "#8A2BE2",
+        "#FF4500",
+        "#008000",
+        "#0000FF",
+        "#FFC0CB",
+        "#FFF9E3",
+        "#7d5c34",
+      },
+      search_count = true,
+      navigation = true,
+      scroll_center = true,
+      search_key = "<localleader>m",
+      cancel_search_key = "<leader>M",
+      color_key = "<localleader>m",
+      cancel_color_key = "<leader>M",
+      select_mode = "random", -- random or loop
+    },
+  },
+
+  {
+    "nvim-lualine/lualine.nvim",
+    opts = function(_, opts)
+      table.insert(opts.sections.lualine_x, 2, {
+        require("interestingwords").lualine_get,
+        cond = require("interestingwords").lualine_has,
+        color = { fg = "#ff9e64" },
+      })
+    end,
   },
 }
